@@ -1,8 +1,0 @@
-C:\Vignesh\practices\onlinestore\online.core\bin\Debug\netstandard2.0\online.core.deps.json
-C:\Vignesh\practices\onlinestore\online.core\bin\Debug\netstandard2.0\online.core.dll
-C:\Vignesh\practices\onlinestore\online.core\bin\Debug\netstandard2.0\online.core.pdb
-C:\Vignesh\practices\onlinestore\online.core\obj\Debug\netstandard2.0\online.core.csproj.CoreCompileInputs.cache
-C:\Vignesh\practices\onlinestore\online.core\obj\Debug\netstandard2.0\online.core.AssemblyInfoInputs.cache
-C:\Vignesh\practices\onlinestore\online.core\obj\Debug\netstandard2.0\online.core.AssemblyInfo.cs
-C:\Vignesh\practices\onlinestore\online.core\obj\Debug\netstandard2.0\online.core.dll
-C:\Vignesh\practices\onlinestore\online.core\obj\Debug\netstandard2.0\online.core.pdb
