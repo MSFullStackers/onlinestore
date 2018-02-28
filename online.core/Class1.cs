@@ -8,6 +8,7 @@ namespace online.core
         List<Item> Get();
     }
 
+    [DiComponent]
     public class Items : IItems
     {
         public List<Item> Get()

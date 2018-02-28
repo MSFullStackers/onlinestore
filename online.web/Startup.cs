@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using online.core;
@@ -21,14 +24,22 @@ namespace onlinestore
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {   
+            //Di register using assembly -> aspnet core     
+            var asseblies = GetLoadedAssemblies().SelectMany(x => x.DefinedTypes);
+            
+            var diComponents = asseblies.Where(a => a.GetTypeInfo().GetCustomAttributes().OfType<IDiComponent>().Any());
+
+            foreach(var type in diComponents)
+            {
+                var interfaceType = type.GetInterface("I" + type.Name);
+                services.Add(new ServiceDescriptor(interfaceType, type, ServiceLifetime.Transient));
+
+                Console.WriteLine("Assembly registered ... " +  type.Name);
+            }
+             
             services.AddMvc();
-
-            //Di register 
-
-            services.AddTransient<IItems,Items>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,5 +52,16 @@ namespace onlinestore
 
             app.UseMvc();
         }
+
+        private static Assembly[] GetLoadedAssemblies()
+        {
+            IEnumerable<Assembly> assemblies = null;
+            var dependencyAssemblies = Enumerable.Empty<Assembly>();
+ 
+            assemblies = DependencyContext.Default.GetDefaultAssemblyNames().Where(a => a.Name.StartsWith("online.")).Select(a => Assembly.Load(a));
+ 
+            return assemblies.ToArray();
+        }
+        
     }
 }
