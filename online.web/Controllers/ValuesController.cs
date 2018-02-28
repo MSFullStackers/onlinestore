@@ -10,13 +10,19 @@ namespace onlinestore.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+
+        private readonly IItems items;
+
+        public ValuesController(IItems items)
+        {
+            this.items = items;
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
-        {
-            var items = new Items();
-
-            var myItems = items.Get();
+        {            
+            var myItems = this.items.Get();
 
             return new string[] { myItems.First().Name ,  myItems.Last().Name  };
         }

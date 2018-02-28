@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using online.core;
 
 namespace onlinestore
 {
@@ -24,6 +25,10 @@ namespace onlinestore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            //Di register 
+
+            services.AddTransient<IItems,Items>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
