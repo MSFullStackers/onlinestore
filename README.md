@@ -1,3 +1,3 @@
 # onlinestore
 
-Demo purpose only :)  
+Demo purpose only ...
