@@ -8,7 +8,7 @@ namespace online.core
         List<Item> Get();
     }
 
-    [DiComponent]
+    [DiComponent( Lifetime = Lifetime.PerScope)]
     public class Items : IItems
     {
         public List<Item> Get()

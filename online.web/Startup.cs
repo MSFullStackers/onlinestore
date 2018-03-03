@@ -27,16 +27,20 @@ namespace onlinestore
         public void ConfigureServices(IServiceCollection services)
         {   
             //Di register using assembly -> aspnet core     
-            var asseblies = GetLoadedAssemblies().SelectMany(x => x.DefinedTypes);
+            var asseblies = GetLoadedAssemblies().SelectMany(x => x.DefinedTypes.Where(dt => !dt.IsAbstract && dt.IsClass));
             
             var diComponents = asseblies.Where(a => a.GetTypeInfo().GetCustomAttributes().OfType<IDiComponent>().Any());
 
             foreach(var type in diComponents)
             {
-                var interfaceType = type.GetInterface("I" + type.Name);
-                services.Add(new ServiceDescriptor(interfaceType, type, ServiceLifetime.Transient));
+                var typeInterface = type.GetTypeInfo().ImplementedInterfaces.First(i => i.Name.Contains(type.Name));
 
-                Console.WriteLine("Assembly registered ... " +  type.Name);
+                // TODO : Get type scope and assign to the life time 
+                var typeScope = type.GetTypeInfo().GetCustomAttributes().First();
+                
+                services.Add(new ServiceDescriptor(typeInterface, type, ServiceLifetime.Transient));
+
+                Console.WriteLine("Assembly registered ... " +  type.Name + " Interface " + typeInterface.Name);
             }
              
             services.AddMvc();

@@ -13,9 +13,12 @@ namespace onlinestore.Controllers
 
         private readonly IItems items;
 
-        public ValuesController(IItems items)
+        private readonly IStudents students;
+
+        public ValuesController(IItems items, IStudents students)
         {
             this.items = items;
+            this.students = students;
         }
 
         // GET api/values
@@ -23,8 +26,15 @@ namespace onlinestore.Controllers
         public IEnumerable<string> Get()
         {            
             var myItems = this.items.Get();
+            var myStudents = this.students.Get();
 
-            return new string[] { myItems.First().Name ,  myItems.Last().Name  };
+            return new string[] 
+            {
+                 myItems.First().Name , 
+                 myItems.Last().Name ,
+                 myStudents.First().Name,
+                 myStudents.Last().Name 
+            };
         }
 
         // GET api/values/5
