@@ -1,3 +1,6 @@
+
+This is not the actual implementation of the project. Practices and demo piece. 
+
 # onlinestore
 
 Demo App for online store ... 
