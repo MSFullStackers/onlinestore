@@ -5,6 +5,12 @@ Demo App for online store ...
 Angular 4+ 
 Bootstrap 4 
 .net core  
+
+## Pre req's 
+
+  1. Install .net core -> https://www.microsoft.com/net/learn/get-started/windows 
+  2. Install nodejs ->  https://nodejs.org/en/download/
+  3. Get bootstrap ->  https://getbootstrap.com/
  
 ## Running api 
 
@@ -17,4 +23,4 @@ Bootstrap 4
    2. npm install 
    3. ng serve 
 
-
+Make sure run api first then UI.
