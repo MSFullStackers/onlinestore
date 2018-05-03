@@ -9,7 +9,8 @@ import { ItemsComponent } from './items/items.component';
 import { MenubarComponent } from './menubar/menubar.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { HttpModule } from '@angular/http';
-import { ItemsService } from './items.service'; 
+import { ItemsService } from './items.service';
+import { MarkettingComponent } from './marketting/marketting.component'; 
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ItemsService } from './items.service';
     AppComponent,
     ItemsComponent,
     MenubarComponent,
-    CarouselComponent
+    CarouselComponent,
+    MarkettingComponent
   ],
   imports: [
     BrowserModule,
