@@ -5,15 +5,14 @@ Demo App for online store ...
 Angular 4+ 
 Bootstrap 4 
 .net core  
-
-to run the api 
+ 
+## Running api 
 
   cd to online.web 
   dotnet build 
   dotnet run 
 
-to run the ui part 
-
+## Running UI 
    cd to online.ui 
    npm install 
    ng serve 
