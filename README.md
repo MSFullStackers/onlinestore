@@ -8,13 +8,13 @@ Bootstrap 4
  
 ## Running api 
 
-  cd to online.web 
-  dotnet build 
-  dotnet run 
+  1. cd to online.web 
+  2. dotnet build 
+  3. dotnet run 
 
 ## Running UI 
-   cd to online.ui 
-   npm install 
-   ng serve 
+   1. cd to online.ui 
+   2. npm install 
+   3. ng serve 
 
 

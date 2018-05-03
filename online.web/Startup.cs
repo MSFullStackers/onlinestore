@@ -26,7 +26,7 @@ namespace onlinestore
         public IConfiguration Configuration { get; }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
-        {   
+        {
             services.AddMvc();
 
             //Di register using assembly -> aspnet core     
@@ -35,7 +35,7 @@ namespace onlinestore
 
             var diComponents = asseblies.Where(a => a.GetTypeInfo().GetCustomAttributes().OfType<IDiComponent>().Any());
 
-             var builder = new ContainerBuilder();
+            var builder = new ContainerBuilder();
 
             foreach (var type in diComponents)
             {
@@ -51,11 +51,11 @@ namespace onlinestore
                 services.Add(new ServiceDescriptor(typeInterface, type, ServiceLifetime.Transient));
 
                 Console.WriteLine("Assembly registered ... " + type.Name + " Interface " + typeInterface.Name);
-            } 
-           
+            }
+
             // var container = builder.Build();
             // return container.Resolve<IServiceProvider>();  
-            return null;           
+            return null;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +65,16 @@ namespace onlinestore
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //Cors
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+                builder.AllowCredentials();
+                builder.AllowAnyOrigin(); // For anyone access.
+                //corsBuilder.WithOrigins("http://localhost:5000"); // for a specific url.
+             });
 
             app.UseMvc();
         }
@@ -77,9 +87,9 @@ namespace onlinestore
             assemblies = DependencyContext.Default.GetDefaultAssemblyNames()
                                           .Where(a => a.Name.StartsWith("online."))
                                           .Select(a => Assembly.Load(a));
- 
+
             return assemblies.ToArray();
         }
-        
+
     }
 }

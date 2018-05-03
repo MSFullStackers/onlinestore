@@ -11,36 +11,27 @@ import { ItemsService } from '../items.service';
 
 export class ItemsComponent implements OnInit {
 
-  items: Item[] = [
-    { id: 11, name: 'Mr. Nice' },
-    { id: 12, name: 'Narco' },
-    { id: 13, name: 'Bombasto' },
-    { id: 14, name: 'Celeritas' },
-    { id: 15, name: 'Magneta' },
-    { id: 16, name: 'RubberMan' }
-  ];
- 
-  public selectedItem : Item;
+  items: Item[] = [{ id: 11, name: 'Mr. Nice' }, { id: 11, name: 'Mr. Great' }];
 
-  // constructor(private itemService: ItemsService) { 
-  //   itemService.getAllItems().subscribe( res => { 
-  //     for (let entry of res) {
-  //         let serviceItem  = { id: 11, name: entry };          
-  //         this.items.push( <Item> serviceItem );
-  //     }}
-  //   );  
-  // }
+  public selectedItem: Item;
 
-  constructor(){
+  constructor(private itemService: ItemsService) {
+    itemService.GetAllItems().subscribe(result => {
 
+      console.log(result);
+      for (let entry of <string>result) {
+        let serviceItem = { id: 11, name: entry };
+        this.items.push(<Item>serviceItem);
+      }
+    }
+    );
   }
 
-  ngOnInit() { 
+  ngOnInit() {
   }
-  
+
   onSelect(_item: Item): void {
     this.selectedItem = _item;
   }
-  
+
 }
- 
