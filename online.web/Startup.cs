@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,26 +25,37 @@ namespace onlinestore
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {   
+            services.AddMvc();
+
             //Di register using assembly -> aspnet core     
-            var asseblies = GetLoadedAssemblies().SelectMany(x => x.DefinedTypes.Where(dt => !dt.IsAbstract && dt.IsClass));
-            
+            var asseblies = GetLoadedAssemblies()
+                                .SelectMany(x => x.DefinedTypes.Where(dt => !dt.IsAbstract && dt.IsClass && !dt.IsInterface));
+
             var diComponents = asseblies.Where(a => a.GetTypeInfo().GetCustomAttributes().OfType<IDiComponent>().Any());
 
-            foreach(var type in diComponents)
+             var builder = new ContainerBuilder();
+
+            foreach (var type in diComponents)
             {
                 var typeInterface = type.GetTypeInfo().ImplementedInterfaces.First(i => i.Name.Contains(type.Name));
 
                 // TODO : Get type scope and assign to the life time 
                 var typeScope = type.GetTypeInfo().GetCustomAttributes().First();
-                
+
+                // Autofac registration     
+                //builder.RegisterInstance(typeInterface).As(type);
+
+                // .net core registration 
                 services.Add(new ServiceDescriptor(typeInterface, type, ServiceLifetime.Transient));
 
-                Console.WriteLine("Assembly registered ... " +  type.Name + " Interface " + typeInterface.Name);
-            }
-             
-            services.AddMvc();
+                Console.WriteLine("Assembly registered ... " + type.Name + " Interface " + typeInterface.Name);
+            } 
+           
+            // var container = builder.Build();
+            // return container.Resolve<IServiceProvider>();  
+            return null;           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,8 +73,10 @@ namespace onlinestore
         {
             IEnumerable<Assembly> assemblies = null;
             var dependencyAssemblies = Enumerable.Empty<Assembly>();
- 
-            assemblies = DependencyContext.Default.GetDefaultAssemblyNames().Where(a => a.Name.StartsWith("online.")).Select(a => Assembly.Load(a));
+
+            assemblies = DependencyContext.Default.GetDefaultAssemblyNames()
+                                          .Where(a => a.Name.StartsWith("online."))
+                                          .Select(a => Assembly.Load(a));
  
             return assemblies.ToArray();
         }
