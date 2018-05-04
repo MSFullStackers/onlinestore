@@ -14,6 +14,7 @@ Bootstrap 4
   1. Install .net core -> https://www.microsoft.com/net/learn/get-started/windows 
   2. Install nodejs ->  https://nodejs.org/en/download/
   3. Get bootstrap ->  https://getbootstrap.com/
+  4. Install angular cli -> https://github.com/angular/angular-cli
  
 ## Running api 
 
