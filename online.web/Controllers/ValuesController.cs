@@ -2,37 +2,32 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using online.core;
+    using onlinestore;
 
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        private readonly IItems items;
-
         private readonly IStudents students;
 
-        public ValuesController(IItems items, IStudents students)
+        private readonly IOnlineshopdataContext dbContext;
+
+        public ValuesController(IStudents students,IOnlineshopdataContext dbContext)
         {
-            this.items = items;
             this.students = students;
+            this.dbContext = dbContext;
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            var myItems = this.items.Get();
-            var myStudents = this.students.Get();
-
-            return new string[]
-            {
-                 myItems.First().Name ,
-                 myItems.Last().Name ,
-                 myStudents.First().Name,
-                 myStudents.Last().Name
-            };
+        public Products[] Get()
+        {  
+            var someItems =  (IEnumerable<Products>) this.dbContext.GetList<Products>();
+            
+            return someItems.ToArray();
         }
     }
 }

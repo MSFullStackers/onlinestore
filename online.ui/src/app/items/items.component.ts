@@ -11,18 +11,13 @@ import { ItemsService } from '../items.service';
 
 export class ItemsComponent implements OnInit {
 
-  items: Item[] = [{ id: 11, name: 'Mr. Nice' }, { id: 11, name: 'Mr. Great' }];
+  items:any
 
   public selectedItem: Item;
 
   constructor(private itemService: ItemsService) {
     itemService.GetAllItems().subscribe(result => {
-
-      console.log(result);
-      for (let entry of <string>result) {
-        let serviceItem = { id: 11, name: entry };
-        this.items.push(<Item>serviceItem);
-      }
+      this.items = result;
     }
     );
   }

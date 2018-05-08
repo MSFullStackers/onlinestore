@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,8 @@ namespace onlinestore
         }
 
         public IConfiguration Configuration { get; }
+
+        public IContainer ApplicationContainer { get; private set; }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
@@ -45,21 +48,20 @@ namespace onlinestore
                 var typeScope = type.GetTypeInfo().GetCustomAttributes().First();
 
                 // Autofac registration     
-                //builder.RegisterInstance(typeInterface).As(type);
-
+                // builder.RegisterType(type).As(typeInterface);
                 // .net core registration 
                 services.Add(new ServiceDescriptor(typeInterface, type, ServiceLifetime.Transient));
 
                 Console.WriteLine("Assembly registered ... " + type.Name + " Interface " + typeInterface.Name);
             }
 
-            // var container = builder.Build();
-            // return container.Resolve<IServiceProvider>();  
+            //builder.Build();
+            // Create the IServiceProvider based on the container.
             return null;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env )
         {
             if (env.IsDevelopment())
             {
@@ -73,8 +75,8 @@ namespace onlinestore
                 builder.AllowAnyMethod();
                 builder.AllowCredentials();
                 builder.AllowAnyOrigin(); // For anyone access.
-                //corsBuilder.WithOrigins("http://localhost:5000"); // for a specific url.
-             });
+                                          //corsBuilder.WithOrigins("http://localhost:5000"); // for a specific url.
+            });
 
             app.UseMvc();
         }
