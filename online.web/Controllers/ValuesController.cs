@@ -1,33 +1,26 @@
-﻿namespace onlinestore.Controllers
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Mvc;
-    using online.core;
-    using onlinestore;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Online.Model;
 
+namespace onlinestore.Controllers
+{
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        private readonly IStudents students;
+        private readonly IProductRepository productRepository;
 
-        private readonly IOnlineshopdataContext dbContext;
-
-        public ValuesController(IStudents students,IOnlineshopdataContext dbContext)
+        public ValuesController(IProductRepository productRepository)
         {
-            this.students = students;
-            this.dbContext = dbContext;
+            this.productRepository = productRepository;
         }
 
         [HttpGet]
         public Products[] Get()
-        {  
-            var someItems =  (IEnumerable<Products>) this.dbContext.GetList<Products>();
-            
-            return someItems.ToArray();
+        {
+            var allProducts = productRepository.GetAllAsync().Result.ToArray();
+
+            return allProducts;
         }
     }
 }

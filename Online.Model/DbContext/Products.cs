@@ -1,8 +1,8 @@
-﻿namespace online.core
+﻿using Stwo.Core;
+
+namespace Online.Model
 {
-    using System;
-    using System.Collections.Generic;
-    public partial class Products
+    public partial class Products : EntityBase<int>
     {
         public int Id { get; set; }
         public string Name { get; set; }

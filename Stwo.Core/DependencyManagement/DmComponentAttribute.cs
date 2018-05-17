@@ -1,10 +1,10 @@
 using System;
 
-namespace online.core
+namespace Stwo.Core
 {
-    public class DiComponentAttribute : Attribute, IDiComponent
+    public class DmComponentAttribute : Attribute, IDmComponent
     {
-        public DiComponentAttribute(Type serviceType = null, Lifetime lifetime = Lifetime.Singleton, object key = null, bool enumerationOnly = false)
+        public DmComponentAttribute(Type serviceType = null, Lifetime lifetime = Lifetime.Singleton, object key = null, bool enumerationOnly = false)
         {
             this.Target = serviceType;
             this.Lifetime = lifetime;

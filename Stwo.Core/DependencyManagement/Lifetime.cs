@@ -1,4 +1,4 @@
-namespace online.core
+namespace Stwo.Core
 {
     public enum Lifetime
     {

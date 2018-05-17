@@ -1,8 +1,8 @@
 using System;
 
-namespace online.core
+namespace Stwo.Core
 {
-    public interface IDiComponent
+    public interface IDmComponent
     {
          
         object Key

@@ -12,6 +12,7 @@
     <PackageReference Include="Autofac" Version="4.8.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
   </ItemGroup>
@@ -23,7 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\online.core\online.core.csproj" />
+    <ProjectReference Include="..\Online.Model\Online.Model.csproj" />
+    <ProjectReference Include="..\Stwo.core\Stwo.core.csproj" />
   </ItemGroup>
 
 </Project>
