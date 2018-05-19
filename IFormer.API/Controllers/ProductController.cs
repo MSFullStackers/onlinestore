@@ -16,7 +16,7 @@ namespace onlinestore.Controllers
             this.productRepository = productRepository;
         }
 
-        //[HttpGet]
+        [HttpGet]
         public async Task< List< Product>> Get()
         {
             return await productRepository.GetAllAsync();

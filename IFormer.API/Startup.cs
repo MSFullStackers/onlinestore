@@ -29,7 +29,8 @@ namespace onlinestore
         {
             services.AddMvc();
 
-            services.AddSingleton<DbContext, OnlineshopdataContext>();
+            services.AddDbContext<OnlineshopdataContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
              
             //Di register using assembly -> aspnet core     
             var asseblies = GetLoadedAssemblies()
@@ -73,7 +74,7 @@ namespace onlinestore
                 builder.AllowAnyMethod();
                 builder.AllowCredentials();
                 builder.AllowAnyOrigin(); // For anyone access.
-                                          //corsBuilder.WithOrigins("http://localhost:5000"); // for a specific url.
+                //corsBuilder.WithOrigins("http://localhost:5000"); // for a specific url.
             });
 
             app.UseMvc();
@@ -85,7 +86,7 @@ namespace onlinestore
             var dependencyAssemblies = Enumerable.Empty<Assembly>();
 
             assemblies = DependencyContext.Default.GetDefaultAssemblyNames()
-                                          .Where(a => a.Name.StartsWith("Online.")
+                                          .Where(a => a.Name.StartsWith("IFormer.")
                                                 || a.Name.StartsWith("Stwo."))
                                           .Select(a => Assembly.Load(a));
 
