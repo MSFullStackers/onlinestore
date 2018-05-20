@@ -1,0 +1,15 @@
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/obj/Debug/netcoreapp2.0/IFarmer.API.csproj.CoreCompileInputs.cache
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/obj/Debug/netcoreapp2.0/IFarmer.API.AssemblyInfoInputs.cache
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/obj/Debug/netcoreapp2.0/IFarmer.API.AssemblyInfo.cs
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/bin/Debug/netcoreapp2.0/IFarmer.API.deps.json
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/bin/Debug/netcoreapp2.0/IFarmer.API.runtimeconfig.json
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/bin/Debug/netcoreapp2.0/IFarmer.API.runtimeconfig.dev.json
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/bin/Debug/netcoreapp2.0/IFarmer.API.dll
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/bin/Debug/netcoreapp2.0/IFarmer.API.pdb
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/bin/Debug/netcoreapp2.0/IFarmer.Model.dll
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/bin/Debug/netcoreapp2.0/Stwo.Core.dll
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/bin/Debug/netcoreapp2.0/IFarmer.Model.pdb
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/bin/Debug/netcoreapp2.0/Stwo.Core.pdb
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/obj/Debug/netcoreapp2.0/IFarmer.API.dll
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/obj/Debug/netcoreapp2.0/IFarmer.API.pdb
+/Users/vigneshshankaradevan/GitProjects/onlinestore/IFarmer.API/obj/Debug/netcoreapp2.0/IFarmer.API.csprojResolveAssemblyReference.cache

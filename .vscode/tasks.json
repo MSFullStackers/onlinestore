@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/online.web/onlinestore.csproj"
+                "${workspaceFolder}/IFarmer.API/IFarmer.API.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

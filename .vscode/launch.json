@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/online.web/bin/Debug/netcoreapp2.0/onlinestore.dll",
+            "program": "${workspaceFolder}/IFarmer.API/bin/Debug/netcoreapp2.0/IFarmer.API.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/online.web",
+            "cwd": "${workspaceFolder}/IFarmer.API",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
