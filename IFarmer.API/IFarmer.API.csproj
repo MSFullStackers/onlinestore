@@ -15,6 +15,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
+  
   </ItemGroup>
 
   <ItemGroup>
@@ -25,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IFarmer.Model\IFarmer.Model.csproj" />
-    <ProjectReference Include="..\Stwo.core\Stwo.core.csproj" />
   </ItemGroup>
 
 </Project>
