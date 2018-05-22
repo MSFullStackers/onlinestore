@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-marketting',
-  templateUrl: './marketting.component.html',
-  styleUrls: ['./marketting.component.css']
+  templateUrl: './marketting.component.html'
 })
 export class MarkettingComponent implements OnInit {
 

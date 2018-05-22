@@ -37,3 +37,5 @@ online.web/bin/Debug/netcoreapp2.0/onlinestore.runtimeconfig.dev.json
 online.web/bin/Debug/netcoreapp2.0/onlinestore.deps.json
 
 online.web/obj/project.assets.json
+
+IFarmer.API/obj/Debug/netcoreapp2.0/IFarmer.API.csproj.FileListAbsolute.txt
