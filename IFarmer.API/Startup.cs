@@ -31,7 +31,9 @@ namespace onlinestore
             services.AddScoped<DbContext, OnlineshopdataContext>();
             services.AddDbContext<OnlineshopdataContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-             
+            
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             //Di register using assembly -> aspnet core     
             var asseblies = GetLoadedAssemblies()
                                 .SelectMany(x => x.DefinedTypes.Where(dt => !dt.IsAbstract && dt.IsClass && !dt.IsInterface));
