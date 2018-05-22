@@ -5,6 +5,12 @@ This is not the actual implementation of the project. Practices and demo piece.
 
 Demo App for online store ... 
 
+Demo UI 
+https://onlineshopui.azurewebsites.net/
+
+Demo API 
+https://onlineshopapi.azurewebsites.net/api/product 
+
 Angular 4+ 
 Bootstrap 4 
 .net core  
