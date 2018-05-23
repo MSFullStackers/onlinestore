@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from './item';
 import { ItemsService } from '../items.service';
 
 @Component({
@@ -7,12 +6,11 @@ import { ItemsService } from '../items.service';
   templateUrl: './items.component.html'
 })
 
-
 export class ItemsComponent implements OnInit {
 
   items:any
 
-  public selectedItem: Item;
+  public selectedItem: any;
 
   constructor(private itemService: ItemsService) {
     itemService.GetAllItems().subscribe(result => {
@@ -24,7 +22,7 @@ export class ItemsComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSelect(_item: Item): void {
+  onSelect(_item: any): void {
     this.selectedItem = _item;
   }
 
