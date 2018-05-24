@@ -1,5 +1,5 @@
 
-This is not the actual implementation of the project. Practices and demo piece. 
+This is a demo and practice code 
 
 # onlinestore
 
