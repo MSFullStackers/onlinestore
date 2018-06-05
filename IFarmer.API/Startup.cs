@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
 using RS2.Core;
 using IFarmer.Model;
+using IFarmer.Entity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace onlinestore
 {
@@ -29,8 +33,29 @@ namespace onlinestore
         {
             services.AddMvc();
             services.AddScoped<DbContext, OnlineshopdataContext>();
+            
             services.AddDbContext<OnlineshopdataContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+            // Identity for authentication 
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                     .AddEntityFrameworkStores<ApplicationDbContext>()
+                     .AddDefaultTokenProviders();
+
+            services.AddAuthentication(options => {
+                    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie( options => 
+            {
+                options.LoginPath = "/Account/Login";
+                // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
+                // the path to /Account/AccessDenied.
+                options.AccessDeniedPath = "/Account/AccessDenied";
+            });
             
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -76,6 +101,8 @@ namespace onlinestore
                 builder.AllowCredentials();
                 builder.AllowAnyOrigin(); // For anyone access.
             });
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }

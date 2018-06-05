@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using IFarmer.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IFarmer.API
 {

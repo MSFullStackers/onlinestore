@@ -5,7 +5,7 @@ namespace IFarmer.Model
     public partial class OnlineshopdataContext : DbContext
     {
 
-        public OnlineshopdataContext(DbContextOptions options) : base(options)
+        public OnlineshopdataContext(DbContextOptions<OnlineshopdataContext> options) : base(options)
         {
 
         }
