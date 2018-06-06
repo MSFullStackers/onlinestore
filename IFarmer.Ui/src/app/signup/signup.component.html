@@ -14,12 +14,12 @@
                         <i class="fa fa-twitter"></i>
                     </a>
                 </div>
-                <form class="register-form">
+                <form #f="ngForm" novalidate (ngSubmit)="login(f)">
                     <label>Email</label>
-                    <input type="text" class="form-control" placeholder="Email">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="username">
 
                     <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="password">
                     <button class="btn btn-danger btn-block btn-round">Login</button>
                     <button class="btn btn-danger btn-block btn-round">Register</button>
                 </form>

@@ -10,14 +10,16 @@ import { AppComponent } from './app.component';
 import { ItemsComponent } from './items/items.component';
 import { MenubarComponent } from './menubar/menubar.component';
 import { MarkettingComponent } from './marketting/marketting.component'; 
-
-import { ItemsService } from './items.service';
+import { CartComponent } from './cart/cart.component';
 import { SignupComponent } from './signup/signup.component';
 import { MarkettingFeatureComponent } from './marketting-feature/marketting-feature.component';
-import { ROUTING } from '../app.routing';
-import { CartComponent } from './cart/cart.component';
 
-const appRoutes: Routes = [ { path: 'signup', component: SignupComponent }];
+import { ItemsService } from './items.service';
+import { UserService } from './shared/services/user.service'
+import { ConfigService } from './shared/utils/config.service';
+
+import { ROUTING } from '../app.routing';
+
 
 @NgModule({
   declarations: [
@@ -32,13 +34,14 @@ const appRoutes: Routes = [ { path: 'signup', component: SignupComponent }];
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     HttpClientModule,
     NgbModule.forRoot(),
     ROUTING
   ],
-  providers: [ItemsService],
+  providers: [ItemsService, UserService, ConfigService],
   bootstrap: [AppComponent]
-})
+}) 
 export class AppModule { 
 
 }
