@@ -15,6 +15,7 @@ import { ItemsService } from './items.service';
 import { SignupComponent } from './signup/signup.component';
 import { MarkettingFeatureComponent } from './marketting-feature/marketting-feature.component';
 import { ROUTING } from '../app.routing';
+import { CartComponent } from './cart/cart.component';
 
 const appRoutes: Routes = [ { path: 'signup', component: SignupComponent }];
 
@@ -25,7 +26,8 @@ const appRoutes: Routes = [ { path: 'signup', component: SignupComponent }];
     MenubarComponent,
     MarkettingComponent,
     SignupComponent,
-    MarkettingFeatureComponent
+    MarkettingFeatureComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

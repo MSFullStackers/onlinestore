@@ -1,13 +1,10 @@
 using IFarmer.Entity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using RS2.Core;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace IFarmer.API.Controllers
@@ -86,6 +83,28 @@ namespace IFarmer.API.Controllers
             ticket = await CreateTicketAsync(request, user);
 
             return SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("~/connect/ext")]
+        public  IActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            var redirectUrl = Url.Action(nameof(ExternalLoginCallback),"Account", new { returnUrl });
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider,redirectUrl);
+            return Challenge(properties,provider);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("~/connect/ex1")]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl)
+        {
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+
+            if(info==null) return null;
+
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey,false,true);
+
+            return RedirectToAction(returnUrl);
         }
 
         private async Task<AuthenticationTicket> CreateTicketAsync(AuthConnectRequest request, ApplicationUser user)
