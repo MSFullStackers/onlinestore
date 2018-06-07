@@ -39,7 +39,7 @@ Make sure run api first then UI.
 
 To get latest appsetting.json for connection or update your db with migration script email @ : vigu.yedakad@gmail.com 
 
-#Initial create 
+# Initial create 
 
 dotnet ef migrations add InitialCreate 
 
