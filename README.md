@@ -1,7 +1,7 @@
 
 This is a demo and practice code 
 
-# onlinestore
+# Online Store
 
 App for online store ... 
 

@@ -1,3 +1,4 @@
+using IFarmer.Entity;
 using RS2.Core;
 
 namespace IFarmer.Model

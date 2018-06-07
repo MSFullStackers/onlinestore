@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using IFarmer.Model;
 using Microsoft.AspNetCore.Authorization;
+using IFarmer.Entity;
 
 namespace IFarmer.API
 {

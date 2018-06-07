@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IFarmer.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace IFarmer.Model
 {
     public partial class OnlineshopdataContext : DbContext
     {
-
         public OnlineshopdataContext(DbContextOptions<OnlineshopdataContext> options) : base(options)
         {
 

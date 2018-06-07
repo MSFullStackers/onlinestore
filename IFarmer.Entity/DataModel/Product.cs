@@ -1,6 +1,6 @@
 ﻿using RS2.Core;
 
-namespace IFarmer.Model
+namespace IFarmer.Entity
 {
     public partial class Product : EntityBase<int>
     {
