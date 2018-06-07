@@ -3,7 +3,7 @@ This is a demo and practice code
 
 # onlinestore
 
-Demo App for online store ... 
+App for online store ... 
 
 Demo UI 
 https://onlineshopui.azurewebsites.net/
@@ -24,13 +24,31 @@ Bootstrap 4
  
 ## Running api 
 
-  1. cd to online.web 
+  1. cd to IFarmer.api 
   2. dotnet build 
   3. dotnet run 
 
 ## Running UI 
-   1. cd to online.ui 
+   1. cd to IFarmer.Ui 
    2. npm install 
    3. ng serve 
 
-Make sure run api first then UI.
+Make sure run api first then UI. 
+
+# DB Migration & Connection 
+
+To get latest appsetting.json for connection or update your db with migration script email @ : vigu.yedakad@gmail.com 
+
+#Initial create 
+
+dotnet ef migrations add InitialCreate 
+
+# To undo this action 
+
+ef migrations remove
+
+# apply the migration to the database to create the schema
+
+Update-Database
+
+dotnet ef database update
