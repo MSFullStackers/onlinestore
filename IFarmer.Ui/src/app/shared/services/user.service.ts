@@ -5,7 +5,8 @@ import { UserRegistration } from '../models/user.registration.interface';
 import { ConfigService } from '../utils/config.service';
 import { BaseService } from "./base.service";
 
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/Rx';
+import {Observable} from 'rxjs/Observable';
 import { HttpParams } from '@angular/common/http';
 
 

@@ -12,16 +12,13 @@ import { UserService } from '../shared/services/user.service';
 })
 export class SignupComponent implements OnInit {
 
-    private subscription: Subscription;
-
-    brandNew: boolean;
     errors: string;
     isRequesting: boolean;
     submitted: boolean = false;
     credentials: Credentials = { email: '', password: '' };
 
     constructor(private userService: UserService, private router: Router, private activatedRoute: ActivatedRoute) { }
-    
+
     ngOnInit() { }
 
     login({ value, valid }: { value: Credentials, valid: boolean }) {
@@ -37,7 +34,14 @@ export class SignupComponent implements OnInit {
                             this.router.navigate(['/cart']);
                         }
                     },
-                    error => this.errors = error);
+                    error => {
+                        this.errors = error;
+                        // https://github.com/systemjs/systemjs/issues/1675
+                        // known issue for observable 
+                        if (error.name == 'TypeError') {
+                            this.router.navigate(['/cart']);
+                        }
+                    });
         }
     }
 
