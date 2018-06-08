@@ -22,7 +22,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/assets/sass/paper-kit.scss",
+              "src/assets/sass/rs2-kit.scss",
               "src/assets/css/rs2_ifarmer.css",
               "src/assets/css/nucleo-icons.css"
             ],
@@ -83,7 +83,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/assets/sass/paper-kit.scss",
+              "src/assets/sass/rs2-kit.scss",
               "src/style.css",
               "src/assets/css/nucleo-icons.css"
             ],
