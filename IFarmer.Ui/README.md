@@ -1,6 +1,6 @@
-# IFarmer.Ui
+# IFarmer.UI 
 
-# Build and Run 
+## Build and Run 
 
  1. cd to IFarmer.UI 
  2. npm install 
