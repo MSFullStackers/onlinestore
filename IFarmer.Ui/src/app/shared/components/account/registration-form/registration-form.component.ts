@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../../services/user.service';
+import { UserRegistration } from '../../../models/user.registration.interface';
 
-import { UserRegistration } from '../../shared/models/user.registration.interface';
-import { UserService } from '../../shared/services/user.service';
+
 
 @Component({
   selector: 'app-registration-form',

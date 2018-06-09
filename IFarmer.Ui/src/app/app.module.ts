@@ -7,18 +7,18 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { ItemsComponent } from './items/items.component';
-import { MenubarComponent } from './menubar/menubar.component';
-import { MarkettingComponent } from './marketting/marketting.component'; 
-import { CartComponent } from './cart/cart.component';
-import { SignupComponent } from './signup/signup.component';
-import { MarkettingFeatureComponent } from './marketting-feature/marketting-feature.component';
+import { MenubarComponent } from './shared/components/menubar/menubar.component';
+import { CartComponent } from './shared/components/cart/cart.component';
+import { SignupComponent } from './shared/components/account/signup/signup.component'; 
 
-import { ItemsService } from './items.service';
+import { ItemsService } from './shared/services/items.service';
 import { UserService } from './shared/services/user.service'
 import { ConfigService } from './shared/utils/config.service';
 
 import { ROUTING } from '../app.routing';
+import { DashboardComponent } from './public/dashboard/dashboard.component';
+import { PageNotfoundComponent } from './core/page-notfound/page-notfound.component';
+import { ItemsComponent } from './shared/components/items/items.component';
 
 
 @NgModule({
@@ -26,10 +26,10 @@ import { ROUTING } from '../app.routing';
     AppComponent,
     ItemsComponent,
     MenubarComponent,
-    MarkettingComponent,
     SignupComponent,
-    MarkettingFeatureComponent,
-    CartComponent
+    CartComponent,
+    DashboardComponent,
+    PageNotfoundComponent
   ],
   imports: [
     BrowserModule,
