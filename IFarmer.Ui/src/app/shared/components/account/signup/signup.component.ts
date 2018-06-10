@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { NgxPermissionsService } from 'ngx-permissions';
+
 import { Credentials } from '../../../../shared/models/credentials.interface';
 import { UserService } from '../../../../shared/services/user.service';
 
@@ -17,7 +18,8 @@ export class SignupComponent implements OnInit {
     submitted: boolean = false;
     credentials: Credentials = { email: '', password: '' };
 
-    constructor(private userService: UserService, private router: Router, private activatedRoute: ActivatedRoute) { }
+    constructor(private userService: UserService, private router: Router, 
+        private activatedRoute: ActivatedRoute, private permissionsService: NgxPermissionsService) { }
 
     ngOnInit() { }
 
@@ -31,7 +33,7 @@ export class SignupComponent implements OnInit {
                 .subscribe(
                     result => {
                         if (result) {
-                            this.router.navigate(['/cart']);
+                            this.router.navigate(['/admin']);
                         }
                     },
                     error => {
@@ -39,8 +41,11 @@ export class SignupComponent implements OnInit {
                         // https://github.com/systemjs/systemjs/issues/1675
                         // known issue for observable 
                         if (error.name == 'TypeError') {
-                            this.router.navigate(['/cart']);
+                            this.router.navigate(['/admin']);
                         }
+
+                        const perm = ["admin"];
+                        this.permissionsService.loadPermissions(perm);
                     });
         }
     }

@@ -15,6 +15,7 @@ using IFarmer.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Threading.Tasks;
 
 namespace onlinestore
 {
@@ -33,7 +34,7 @@ namespace onlinestore
         {
             services.AddMvc();
             services.AddScoped<DbContext, OnlineshopdataContext>();
-            
+
             services.AddDbContext<OnlineshopdataContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -45,24 +46,25 @@ namespace onlinestore
                      .AddEntityFrameworkStores<ApplicationDbContext>()
                      .AddDefaultTokenProviders();
 
-            services.AddAuthentication(options => {
-                    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie( options => 
+            services.AddAuthentication(options =>
             {
-                options.LoginPath = "/Account/Login";
-                // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
-                // the path to /Account/AccessDenied.
-                options.AccessDeniedPath = "/Account/AccessDenied";
-            });
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(options =>
+           {
+               options.LoginPath = "/Account/Login";
+               // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
+               // the path to /Account/AccessDenied.
+               options.AccessDeniedPath = "/Account/AccessDenied";
+           });
 
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
-            
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             //Di register using assembly -> aspnet core     
@@ -92,7 +94,7 @@ namespace onlinestore
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -111,6 +113,9 @@ namespace onlinestore
             app.UseAuthentication();
 
             app.UseMvc();
+
+            // TODO : This does not need to be here everytime
+            // CreateRolesAndAdminUser(serviceProvider);
         }
 
         private static Assembly[] GetLoadedAssemblies()
@@ -124,6 +129,77 @@ namespace onlinestore
                                           .Select(a => Assembly.Load(a));
 
             return assemblies.ToArray();
+        }
+
+        private void CreateRolesAndAdminUser(IServiceProvider serviceProvider)
+        {
+            string[] roleNames = { "admin", "buyer", "producer" };
+
+            foreach (string roleName in roleNames)
+            {
+                CreateRole(serviceProvider, roleName);
+            }
+
+            AddUserToRole(serviceProvider, Configuration["RoleSetting:DefaultAdmin:email"], Configuration["RoleSetting:DefaultAdmin:password"], "admin");
+            AddUserToRole(serviceProvider, Configuration["RoleSetting:DefaultBuyer:email"], Configuration["RoleSetting:DefaultBuyer:password"], "buyer");
+            AddUserToRole(serviceProvider, Configuration["RoleSetting:DefaultProducer:email"], Configuration["RoleSetting:DefaultProducer:password"], "producer");
+        }
+
+        /// <summary>
+        /// Create a role if not exists.
+        /// </summary>
+        /// <param name="serviceProvider">Service Provider</param>
+        /// <param name="roleName">Role Name</param>
+        private static void CreateRole(IServiceProvider serviceProvider, string roleName)
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            Task<bool> roleExists = roleManager.RoleExistsAsync(roleName);
+            roleExists.Wait();
+
+            if (!roleExists.Result)
+            {
+                Task<IdentityResult> roleResult = roleManager.CreateAsync(new IdentityRole(roleName));
+                roleResult.Wait();
+            }
+        }
+
+        /// <summary>
+        /// Add user to a role if the user exists, otherwise, create the user and adds him to the role.
+        /// </summary>
+        /// <param name="serviceProvider">Service Provider</param>
+        /// <param name="userEmail">User Email</param>
+        /// <param name="userPwd">User Password. Used to create the user if not exists.</param>
+        /// <param name="roleName">Role Name</param>
+        private static void AddUserToRole(IServiceProvider serviceProvider, string userEmail,
+            string userPwd, string roleName)
+        {
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            Task<ApplicationUser> checkAppUser = userManager.FindByEmailAsync(userEmail);
+            checkAppUser.Wait();
+
+            ApplicationUser appUser = checkAppUser.Result;
+
+            if (checkAppUser.Result == null)
+            {
+                ApplicationUser newAppUser = new ApplicationUser
+                {
+                    Email = userEmail,
+                    UserName = userEmail
+                };
+
+                Task<IdentityResult> taskCreateAppUser = userManager.CreateAsync(newAppUser, userPwd);
+                taskCreateAppUser.Wait();
+
+                if (taskCreateAppUser.Result.Succeeded)
+                {
+                    appUser = newAppUser;
+                }
+            }
+
+            Task<IdentityResult> newUserRole = userManager.AddToRoleAsync(appUser, roleName);
+            newUserRole.Wait();
         }
 
     }

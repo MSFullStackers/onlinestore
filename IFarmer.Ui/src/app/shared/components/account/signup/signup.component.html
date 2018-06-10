@@ -4,15 +4,14 @@
         <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
             <div class="card card-register">
                 <h3 class="title">Welcome</h3>
-                <div class="social-line text-center"> 
+                <div *ngIf="errors" class="alert alert-danger text-center ">{{errors}}</div>
+                <div class="social-line text-center">
                     <a href="#" class="btn btn-neutral btn-google btn-just-icon">
-                        <i class="fa fa-facebook"></i> 
+                        <i class="fa fa-facebook"></i>
                     </a>
-
                     <a href="#" class="btn btn-neutral btn-google btn-just-icon">
                         <i class="fa fa-google-plus"></i>
                     </a>
-
                     <a href="#" class="btn btn-neutral btn-google btn-just-icon">
                         <i class="fa fa-twitter"></i>
                     </a>
@@ -33,3 +32,4 @@
         </div>
     </div>
 </div>
+<br/>

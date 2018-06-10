@@ -19,7 +19,8 @@ import { ROUTING } from '../app.routing';
 import { DashboardComponent } from './public/dashboard/dashboard.component';
 import { PageNotfoundComponent } from './core/page-notfound/page-notfound.component';
 import { ItemsComponent } from './shared/components/items/items.component';
-
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ItemsComponent } from './shared/components/items/items.component';
     SignupComponent,
     CartComponent,
     DashboardComponent,
-    PageNotfoundComponent
+    PageNotfoundComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { ItemsComponent } from './shared/components/items/items.component';
     HttpModule,
     HttpClientModule,
     NgbModule.forRoot(),
+    NgxPermissionsModule.forRoot(),
     ROUTING
   ],
   providers: [ItemsService, UserService, ConfigService],
