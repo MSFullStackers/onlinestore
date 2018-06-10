@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
     submitted: boolean = false;
     credentials: Credentials = { email: '', password: '' };
 
-    constructor(private userService: UserService, private router: Router, 
+    constructor(private userService: UserService, private router: Router,
         private activatedRoute: ActivatedRoute, private permissionsService: NgxPermissionsService) { }
 
     ngOnInit() { }
@@ -43,9 +43,10 @@ export class SignupComponent implements OnInit {
                         if (error.name == 'TypeError') {
                             this.router.navigate(['/admin']);
                         }
-
-                        const perm = ["admin"];
-                        this.permissionsService.loadPermissions(perm);
+                        else {
+                            const perm = ["admin"];
+                            this.permissionsService.loadPermissions(perm);
+                        }
                     });
         }
     }
