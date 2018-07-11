@@ -1,15 +1,9 @@
 
-This is a demo and practice code 
+This is a demo code 
 
 # Online Store
 
-App for online store ... 
-
-Demo UI 
-https://onlineshopui.azurewebsites.net/
-
-Demo API 
-https://onlineshopapi.azurewebsites.net/api/product 
+App for online store. To learn more visit http://ifarmers.radixs2.com/
 
 Angular 4+ 
 Bootstrap 4 
@@ -37,7 +31,7 @@ Make sure run api first then UI.
 
 # DB Migration & Connection 
 
-To get latest appsetting.json for connection or update your db with migration script email @ : vigu.yedakad@gmail.com 
+To get latest appsetting.json for connection or update your db with migration script email @ : askradixs2@gmail.com 
 
 # Initial create 
 
